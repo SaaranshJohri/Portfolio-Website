@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - Saaransh Johri</title>
+  <link rel="stylesheet" href="css/style.css" />
+  
+</head>
+<body>
+  <header>
+    <h1>Saaransh Johri</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#" class="active">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="certifications.html">Certifications</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero-section">
+    <canvas id="bgCanvas"></canvas>
+    <div class="hero-content about-wrapper">
+      <div class="about-grid">
+        <div class="profile-card">
+          <img src="images/yourphoto.jpg" alt="Saaransh Johri" class="profile-pic" />
+          <h2>About Me</h2>
+          <p class="about-intro">
+            I'm Saaransh Johri, passionate about building intelligent systems using AI, ML, and Data Science. With hands-on experience in real-world projects, I aim to leverage technology to solve impactful problems.
+          </p>
+          <div class="cta-row">
+            <a href="mailto:johrisaaransh11@gmail.com" class="btn">Contact Me</a>
+            <a href="resume 25 july.pdf" class="btn outline" target="_blank" rel="noopener">Download Resume</a>
+          </div>
+        </div>
+
+        <div class="details-column">
+          <div class="section">
+            <h3 class="section-title">Skills</h3>
+            <div class="skills-list">
+              <span class="skill">Python</span>
+              <span class="skill">C/C++</span>
+              <span class="skill">Data Analytics</span>
+              <span class="skill">Machine Learning</span>
+              <span class="skill">Flask</span>
+              <span class="skill">Computer Vision</span>
+              <span class="skill">NLP</span>
+              <span class="skill">HTML/CSS/JS</span>
+              <span class="skill">Git</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3 class="section-title">Quick Stats</h3>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-number" data-target="4">0</div>
+                <div class="stat-label">Major Projects</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-target="9">0</div>
+                <div class="stat-label">Skills & Tools</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-target="4">0</div>
+                <div class="stat-label">Certifications</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-number" data-target="2">0</div>
+                <div class="stat-label">Active Side Projects</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/particles.js"></script>
+  <script>
+    // counter animation when in viewport
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      const duration = 1500; // ms
+      counters.forEach(counter => {
+        const target = +counter.dataset.target;
+        let start = 0;
+        const step = (timestamp, startTime = performance.now()) => {
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          counter.textContent = Math.floor(progress * target);
+          if (progress < 1) {
+            requestAnimationFrame(ts => step(ts, startTime));
+          } else {
+            counter.textContent = target;
+          }
+        };
+        requestAnimationFrame(step);
+      });
+    }
+
+    // intersection observer to trigger once
+    const statsSection = document.querySelector('.stats-grid');
+    if (statsSection) {
+      const obs = new IntersectionObserver(
+        entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              animateCounters();
+              obs.unobserve(statsSection);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      obs.observe(statsSection);
+    }
+  </script>
+</body>
+</html>
